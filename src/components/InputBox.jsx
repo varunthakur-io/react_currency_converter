@@ -1,4 +1,5 @@
-import React, { useId } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useId } from "react";
 
 function InputBox({
   label,
@@ -6,44 +7,47 @@ function InputBox({
   onAmountChange,
   onCurrencyChange,
   currencyOptions = [],
-  selectCurrency = 'usd',
+  selectCurrency = "usd",
   amountDisabe = false,
   currencyDisable = false,
-  className = '',
+  className = "",
 }) {
-  const amountinputId = useId();
+  const amountInputId = useId();
   return (
-    <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
-      <div className="w-1/2">
-        <label
-          className="text-black/40 mb-2 inline-block"
-          htmlFor={amountinputId}
-        >
-          {label}
-        </label>
+    <div
+      className={`flex flex-col gap-1 p-3 bg-gray-900 rounded-lg border border-gray-700 ${className}`}
+    >
+      <label
+        htmlFor={amountInputId}
+        className="text-gray-400 text-xs font-semibold uppercase tracking-wide"
+      >
+        {label}
+      </label>
+      <div className="flex gap-3">
         <input
-          id={amountinputId}
-          className="outline-none w-full bg-transparent py-1.5"
+          id={amountInputId}
+          className="w-2/3 p-1 bg-gray-800 text-white border border-gray-700 rounded-md focus:border-blue-500 outline-none disabled:opacity-50"
           type="number"
-          placeholder="Amount"
+          placeholder="0"
           disabled={amountDisabe}
           value={amount}
           onChange={(e) =>
             onAmountChange && onAmountChange(Number(e.target.value))
           }
         />
-      </div>
-      <div className="w-1/2 flex flex-wrap justify-end text-right">
-        <p className="text-black/40 mb-2 w-full">Currency Type</p>
         <select
-          className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
+          className="w-1/3 p-1 pl-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:border-blue-500 outline-none disabled:opacity-50"
           value={selectCurrency}
           onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
           disabled={currencyDisable}
         >
           {currencyOptions.map((currency) => (
-            <option key={currency} value={currency}>
-              {currency}
+            <option
+              key={currency}
+              value={currency}
+              className="bg-gray-800 text-white"
+            >
+              {currency.toUpperCase()}
             </option>
           ))}
         </select>
