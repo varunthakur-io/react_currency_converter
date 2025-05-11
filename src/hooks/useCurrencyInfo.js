@@ -4,8 +4,7 @@ function useCurrencyInfo(currency) {
   const [data, setData] = useState({});
   useEffect(() => {
     const api = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`;
-    // const api = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`;
-
+    
     fetch(api)
       .then((res) => res.json())
       .then((res) => setData(res[currency]));

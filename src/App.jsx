@@ -9,7 +9,10 @@ function App() {
   const [convertedAmount, setConvertedAmount] = useState(0);
 
   const currencyInfo = useCurrencyInfo(from);
-  const options = Object.keys(currencyInfo);
+
+  const options = Object.keys(currencyInfo).length
+    ? Object.keys(currencyInfo)
+    : ["usd", "inr"];
 
   const swap = () => {
     setFrom(to);
@@ -19,7 +22,9 @@ function App() {
   };
 
   const convert = () => {
-    setConvertedAmount(amount * currencyInfo[to]);
+    if (amount >= 0 && currencyInfo?.[to]) {
+      setConvertedAmount((amount * currencyInfo[to]).toFixed(2));
+    }
   };
 
   return (
@@ -38,9 +43,9 @@ function App() {
             <InputBox
               label="From"
               amount={amount}
-              currencyOptions={options}
-              onCurrencyChange={(currency) => setFrom(currency)}
               onAmountChange={(amount) => setAmount(amount)}
+              onCurrencyChange={(currency) => setFrom(currency)}
+              currencyOptions={options}
               selectCurrency={from}
             />
           </div>
@@ -77,8 +82,8 @@ function App() {
             <InputBox
               label="To"
               amount={convertedAmount}
-              currencyOptions={options}
               onCurrencyChange={(currency) => setTo(currency)}
+              currencyOptions={options}
               selectCurrency={to}
               amountDisable="true"
             />
