@@ -114,7 +114,14 @@ function App() {
         {/* Footer */}
         <div className="mt-8 text-center text-gray-400 text-xs">
           Powered by{" "}
-          <span className="font-semibold text-blue-400">Your Currency API</span>
+          <a
+            href="https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2025.6.28/v1/currencies/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-blue-400 underline hover:text-blue-300"
+          >
+            Fawaz Ahmed Currency API
+          </a>
         </div>
       </div>
     </div>
