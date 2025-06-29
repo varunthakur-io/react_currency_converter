@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputBox from "./components/InputBox";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
   // State for user input amount
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
 
   // State for source currency code
   const [from, setFrom] = useState("usd");
@@ -37,6 +37,11 @@ function App() {
       setConvertedAmount((amount * currencyInfo[to]).toFixed(2));
     }
   };
+
+  // Auto-convert when amount, currency, or rates change
+  useEffect(() => {
+    convert();
+  }, [amount, from, to, currencyInfo]);
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-gray-900 to-gray-950">
